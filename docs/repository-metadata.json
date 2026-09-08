@@ -1,0 +1,14 @@
+{
+  "name": "rag-sleep-assistant",
+  "owner": "YIM551",
+  "description": "Evidence-based portfolio case study of hybrid retrieval and context-grounded sleep consultation in a Spring AI service.",
+  "topics": [
+    "rag",
+    "spring-ai",
+    "java",
+    "qdrant",
+    "lucene",
+    "hybrid-search",
+    "information-retrieval"
+  ]
+}

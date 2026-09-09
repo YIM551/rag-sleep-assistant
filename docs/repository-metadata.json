@@ -1,14 +1,14 @@
 {
-  "name": "rag-sleep-assistant",
-  "owner": "YIM551",
-  "description": "Evidence-based portfolio case study of hybrid retrieval and context-grounded sleep consultation in a Spring AI service.",
+  "description": "Sleep information assistant connecting document ingestion, hybrid retrieval and cited responses, with source-backed experiments and an actual mobile demo.",
   "topics": [
     "rag",
-    "spring-ai",
+    "data-engineering",
     "java",
+    "spring-boot",
     "qdrant",
     "lucene",
     "hybrid-search",
-    "information-retrieval"
-  ]
+    "portfolio"
+  ],
+  "scope": "Team backend and personal RAG contribution; prototype, not a validated medical product"
 }

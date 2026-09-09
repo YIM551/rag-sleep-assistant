@@ -1,0 +1,337 @@
+spring:
+  application:
+    name: SleepWell Backend API
+
+  # Spring Data 페이징 설정
+  data:
+    web:
+      pageable:
+        page-serialization-mode: VIA_DTO  # PageImpl 직렬화 경고 제거
+
+  # Multipart 파일 업로드 설정 (음성 파일 처리)
+  servlet:
+    multipart:
+      max-file-size: 1GB       # 단일 파일 최대 크기 (ASMR 파일 지원)
+      max-request-size: 1GB    # 전체 요청 최대 크기
+      enabled: true
+
+  # Spring AI 설정 (수면 상담 최적화 - GPT-5 적용)
+  ai:
+    # OpenAI 설정 - GPT-5 최신 모델 (최고 품질 의료 상담)
+    openai:
+      api-key: ${OPENAI_API_KEY:dummy-key-for-testing}
+      chat:
+        options:
+          model: ${OPENAI_MODEL:gpt-5}            # gpt-4o-mini → gpt-5 (90% 캐시 할인)
+          temperature: ${OPENAI_TEMPERATURE:0.3}  # 0.6 → 0.3 (의료 상담 정확도 향상)
+          max-tokens: ${OPENAI_MAX_TOKENS:800}    # 4096 → 800 (RAG 응답 최적화)
+          top-p: ${OPENAI_TOP_P:0.9}              # 품질 높은 응답 생성
+      # TTS (Text-to-Speech) 설정 - 동일한 API 키 사용
+      audio:
+        speech:
+          model: ${OPENAI_TTS_MODEL:tts-1}
+          voice: ${OPENAI_TTS_VOICE:alloy}
+          response-format: ${OPENAI_TTS_FORMAT:mp3}
+          speed: ${OPENAI_TTS_SPEED:1.0}
+    
+    # Anthropic Claude 설정 - 분석/요약용 (정확한 응답)
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY:dummy-key-for-testing}
+      chat:
+        options:
+          model: ${ANTHROPIC_MODEL:claude-3-5-sonnet-latest}
+          temperature: ${ANTHROPIC_TEMPERATURE:0.3}  # 정확한 분석을 위한 낮은 온도
+          max-tokens: ${ANTHROPIC_MAX_TOKENS:2048}   # 상세한 분석 보고서
+          top-p: ${ANTHROPIC_TOP_P:0.8}              # 일관된 분석 결과
+    
+    # Google Vertex AI Gemini 설정 - 주력 상담용 (기본 서비스)
+    vertex:
+      ai:
+        gemini:
+          project-id: ${VERTEX_AI_PROJECT_ID:your-gcp-project-id}
+          location: ${VERTEX_AI_LOCATION:us-central1}
+          chat:
+            options:
+              model: ${VERTEX_AI_MODEL:gemini-1.5-pro}
+              temperature: ${VERTEX_AI_TEMPERATURE:0.7}      # 자연스러운 상담 응답
+              max-output-tokens: ${VERTEX_AI_MAX_TOKENS:2048} # 충분한 길이의 상담
+              top-p: ${VERTEX_AI_TOP_P:0.9}                  # 다양하고 창의적인 응답
+              top-k: ${VERTEX_AI_TOP_K:40}                   # 적절한 선택 범위
+
+  # 데이터베이스 설정
+  datasource:
+    url: jdbc:h2:mem:sleepwell;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: update  # JPA가 스키마 자동 관리
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  
+  # H2 Console (개발용)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  # Flyway 마이그레이션 설정 (프로덕션용으로 비활성화)
+  flyway:
+    enabled: false
+
+  # Cache 설정
+  cache:
+    cache-names: userProfile
+    simple:
+      spec: maximumSize=1000,expireAfterWrite=1h
+
+  # Spring Security OAuth2 설정
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:your-google-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:your-google-client-secret}
+            scope:
+              - profile
+              - email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            client-name: Google
+          naver:
+            client-id: ${NAVER_CLIENT_ID:dummy-naver-client-id}
+            client-secret: ${NAVER_CLIENT_SECRET:dummy-naver-client-secret}
+            client-authentication-method: client_secret_post
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - name
+              - email
+              - profile_image
+            client-name: Naver
+          kakao:
+            client-id: ${KAKAO_CLIENT_ID:dummy-kakao-client-id}
+            client-secret: ${KAKAO_CLIENT_SECRET:dummy-kakao-client-secret}
+            client-authentication-method: client_secret_post
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - profile_nickname
+              - profile_image
+            client-name: Kakao
+        provider:
+          naver:
+            authorization-uri: https://nid.naver.com/oauth2.0/authorize
+            token-uri: https://nid.naver.com/oauth2.0/token
+            user-info-uri: https://openapi.naver.com/v1/nid/me
+            user-name-attribute: response
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+  # AWS S3 설정 (Spring Cloud AWS 3.x)
+  cloud:
+    aws:
+      credentials:
+        access-key: ${AWS_ACCESS_KEY_ID:}
+        secret-key: ${AWS_SECRET_ACCESS_KEY:}
+      s3:
+        region: ${AWS_REGION:ap-northeast-2}
+      region:
+        static: ${AWS_REGION:ap-northeast-2}
+      stack:
+        auto: false  # CloudFormation 비활성화
+
+# JWT 설정
+jwt:
+  secret: ${JWT_SECRET:}
+  expiration: 604800000  # 7일 (밀리초) - 테스트용으로 연장
+  refresh-expiration: 604800000  # 7일 (밀리초)
+
+# Swagger/OpenAPI 설정 - BOM으로 호환성 문제 해결 후 활성화
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    show-common-extensions: true  # Bean Validation 스키마 표시
+
+# 로깅 레벨
+logging:
+  level:
+    com.sleepwell: debug
+    org.hibernate.SQL: debug
+    org.springframework.security: debug
+
+# AI 분석 설정 (기존 호환성 유지)
+ai:
+  analysis:
+    enabled: false  # AI 기능 비활성화 (API 키 없음)
+
+# SleepWell 특화 설정
+sleepwell:
+  # AI 서비스 라우터 설정
+  ai:
+    fallback-enabled: ${AI_FALLBACK_ENABLED:true}           # AI 서비스 폴백 활성화
+    load-balancing-enabled: ${AI_LOAD_BALANCING:false}      # 로드 밸런싱 비활성화 (우선순위 기반)
+    preferred-provider: ${AI_PREFERRED_PROVIDER:gemini}     # 기본 선호 프로바이더
+
+  # 스케줄러 설정
+  scheduler:
+    analysis-execution:
+      enabled: ${ANALYSIS_SCHEDULER_ENABLED:true}  # 분석 실행 스케줄러 활성화
+    platform-sync:
+      enabled: ${PLATFORM_SYNC_SCHEDULER_ENABLED:true}  # 플랫폼 동기화 스케줄러 활성화
+  
+  # 비동기 처리 설정
+  async:
+    core-pool-size: ${ASYNC_CORE_POOL_SIZE:5}
+    max-pool-size: ${ASYNC_MAX_POOL_SIZE:20}
+    queue-capacity: ${ASYNC_QUEUE_CAPACITY:100}
+    thread-name-prefix: "sleepwell-async-"
+  
+  # 분석 실행 설정
+  analysis:
+    execution:
+      max-retry-count: ${ANALYSIS_MAX_RETRY:3}
+      processing-timeout-minutes: ${ANALYSIS_TIMEOUT:30}
+      cleanup-days: ${ANALYSIS_CLEANUP_DAYS:30}
+  
+  # 플랫폼 통합 설정
+  platform:
+    samsung-health:
+      enabled: ${SAMSUNG_HEALTH_ENABLED:true}
+      api-key: ${SAMSUNG_HEALTH_API_KEY:}
+    apple-health:
+      enabled: ${APPLE_HEALTH_ENABLED:true}
+      api-key: ${APPLE_HEALTH_API_KEY:}
+  
+  # 음성 처리 설정
+  voice:
+    openai:
+      whisper:
+        model: ${OPENAI_WHISPER_MODEL:whisper-1}
+        timeout: ${OPENAI_WHISPER_TIMEOUT:30000}
+        max-file-size: ${OPENAI_WHISPER_MAX_FILE_SIZE:25}  # MB
+      tts:
+        model: ${OPENAI_TTS_MODEL:tts-1}
+        voice: ${OPENAI_TTS_VOICE:alloy}
+        timeout: ${OPENAI_TTS_TIMEOUT:30000}
+        max-text-length: ${OPENAI_TTS_MAX_TEXT_LENGTH:4096}
+    google:
+      speech:
+        project-id: ${GOOGLE_SPEECH_PROJECT_ID:}
+        location: ${GOOGLE_SPEECH_LOCATION:global}
+        timeout: ${GOOGLE_SPEECH_TIMEOUT:60000}
+        max-file-size: ${GOOGLE_SPEECH_MAX_FILE_SIZE:10}  # MB
+      tts:
+        project-id: ${GOOGLE_TTS_PROJECT_ID:}
+        location: ${GOOGLE_TTS_LOCATION:global}
+        timeout: ${GOOGLE_TTS_TIMEOUT:30000}
+        max-text-length: ${GOOGLE_TTS_MAX_TEXT_LENGTH:5000}
+
+# Actuator 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,prometheus,auditevents" # auditenvents 엔드포인트 노출
+  endpoint:
+    health:
+      show-details: always
+
+# 토스페이먼츠 설정
+tosspayments:
+  api:
+    secret-key: ${TOSSPAYMENTS_SECRET_KEY:test_sk_zXLkKEypNArWmo50nX3lmeaxYG5R}
+    client-key: ${TOSSPAYMENTS_CLIENT_KEY:test_ck_0RnYX2w532ey3YBOJ2VmNAqzNdxF}
+    is-production: ${TOSSPAYMENTS_IS_PRODUCTION:false}
+    timeout: ${TOSSPAYMENTS_TIMEOUT:60000}
+    max-retry: ${TOSSPAYMENTS_MAX_RETRY:3}
+  redirect:
+    success-url: ${TOSSPAYMENTS_SUCCESS_URL:http://localhost:3000/payment/success}
+    fail-url: ${TOSSPAYMENTS_FAIL_URL:http://localhost:3000/payment/fail}
+  webhook:
+    url: ${TOSSPAYMENTS_WEBHOOK_URL:http://localhost:8080/api/payment/webhook/tosspayments}
+    secret: ${TOSSPAYMENTS_WEBHOOK_SECRET:}
+  window:
+    type: ${TOSSPAYMENTS_WINDOW_TYPE:iframe}
+    easyPay:
+      enabled: ${TOSSPAYMENTS_EASYPAY_ENABLED:true}
+  refund:
+    reason:
+      default: ${TOSSPAYMENTS_REFUND_REASON_DEFAULT:고객 요청}
+    bank:
+      code: ${TOSSPAYMENTS_REFUND_BANK_CODE:004}
+  payment:
+    timeout-minutes: ${TOSSPAYMENTS_PAYMENT_TIMEOUT:15}
+
+# 아임포트 설정 (다중 PG사 지원)
+payment:
+  iamport:
+    api-key: ${IAMPORT_API_KEY:test_iamport_api_key}
+    api-secret: ${IAMPORT_API_SECRET:test_iamport_api_secret}
+    base-url: ${IAMPORT_BASE_URL:https://api.iamport.kr}
+    timeout: ${IAMPORT_TIMEOUT:30}
+    max-retry: ${IAMPORT_MAX_RETRY:3}
+    sandbox: ${IAMPORT_SANDBOX:true}
+  webhook:
+    iamport-url: ${IAMPORT_WEBHOOK_URL:http://localhost:8080/api/payments/webhook/iamport}
+
+# Firebase 설정
+firebase:
+  enabled: ${FIREBASE_ENABLED:false}
+  credentials-path: ${FIREBASE_CREDENTIALS_PATH:}
+  project-id: ${FIREBASE_PROJECT_ID:sleepwell-app}
+
+# Application 설정
+app:
+  oauth2:
+    authorized-redirect-uri: ${OAUTH2_REDIRECT_URI:http://43.202.140.2/oauth2/redirect}
+  jackson:
+    time-zone: Asia/Seoul
+    date-format: yyyy-MM-dd HH:mm:ss
+
+# CORS 설정
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://43.202.140.2}
+
+
+# Resilience4j Rate Limiting 설정
+resilience4j:
+  ratelimiter:
+    instances:
+      asmr-session-creation:
+        limit-for-period: ${ASMR_SESSION_RATE_LIMIT:10}        # 시간당 최대 10개 세션
+        limit-refresh-period: ${ASMR_SESSION_RATE_PERIOD:1h}   # 1시간 윈도우
+        timeout-duration: ${ASMR_SESSION_RATE_TIMEOUT:3s}      # 3초 대기
+        register-health-indicator: true
+        event-consumer-buffer-size: 100
+      asmr-api-requests:
+        limit-for-period: ${ASMR_API_RATE_LIMIT:30}            # 분당 최대 30개 요청
+        limit-refresh-period: ${ASMR_API_RATE_PERIOD:1m}       # 1분 윈도우
+        timeout-duration: ${ASMR_API_RATE_TIMEOUT:1s}          # 1초 대기
+        register-health-indicator: true
+        event-consumer-buffer-size: 50
+  circuitbreaker:
+    instances:
+      asmr-service:
+        failure-rate-threshold: ${ASMR_CB_FAILURE_RATE:50}     # 50% 실패율에서 Circuit Open
+        wait-duration-in-open-state: ${ASMR_CB_WAIT_DURATION:30s}  # 30초 대기 후 Half-Open
+        sliding-window-size: ${ASMR_CB_WINDOW_SIZE:10}         # 최근 10개 요청 기준
+        minimum-number-of-calls: ${ASMR_CB_MIN_CALLS:5}       # 최소 5개 호출 후 판단
+        register-health-indicator: true
+  metrics:
+    enabled: true
+    use-global-registry: true

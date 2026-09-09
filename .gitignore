@@ -36,3 +36,11 @@ checkpoints/
 *.pptx
 *.hwpx
 *.zip
+
+# Local service data and credentials
+logs/
+rag-corpus/
+secrets.toml
+*.jks
+*.p12
+local-summary.json

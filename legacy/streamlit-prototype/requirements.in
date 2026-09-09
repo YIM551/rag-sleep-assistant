@@ -1,0 +1,17 @@
+# Import-derived dependency inventory; original versions were not recoverable.
+# This is not a tested lockfile or a claim that latest versions are compatible.
+streamlit
+python-dotenv
+langchain-openai
+langchain-community
+pinecone
+sentence-transformers
+transformers
+torch
+torchaudio
+PyAudio
+SpeechRecognition
+openai-whisper
+pydub
+gTTS
+requests

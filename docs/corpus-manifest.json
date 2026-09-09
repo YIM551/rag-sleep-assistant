@@ -1,0 +1,181 @@
+{
+  "format": "PDF",
+  "archived_file_count": 16,
+  "note": "File presence does not establish indexed chunk count or use in every run. DOI candidates are extracted, not a verified bibliographic database. No document text redistributed.",
+  "files": [
+    {
+      "filename": "2012AfonsoMenopause-1.pdf",
+      "bytes": 569793,
+      "sha256": "a7076bb2c7990bb48c4f75f8b6c59132fd52bcc1706e6b0d3a0591e81d281b68",
+      "pages": 9,
+      "doi_candidates_from_first_two_pages": [
+        "10.1097/gme.0b013e318228225f"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "AcupunctureImprovesPeri-menopausalInsomniaFuetal.SLEEPVol.40No.112017.pdf",
+      "bytes": 848170,
+      "sha256": "34f412ce87b0b9cccc024a7052f8a15256191f334de12c77dd4c89ebb0948984",
+      "pages": 9,
+      "doi_candidates_from_first_two_pages": [
+        "10.1093/sleep/zsx153"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "BOOKS.YOSSR.COM-Why-We-Sleep.pdf",
+      "bytes": 2553360,
+      "sha256": "e9b9ec07e44f3feec8ff971aa5d5cadda471ab790f0bd11ce1e96ce1f4228f26",
+      "pages": 381,
+      "doi_candidates_from_first_two_pages": [],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "ijrb-20-255.pdf",
+      "bytes": 1190353,
+      "sha256": "d53c88c950d9e25628944a8a4e4c883920a3ab25f02d3c3588c2214d8ebc2a8d",
+      "pages": 18,
+      "doi_candidates_from_first_two_pages": [
+        "10.18502/ijrm.v20i4.10898"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "jcm-13-00428.pdf",
+      "bytes": 507610,
+      "sha256": "f1531112f83daecd896f30e407e77d494038742a6e5a61b713b82ac97d49f560",
+      "pages": 14,
+      "doi_candidates_from_first_two_pages": [
+        "10.3390/jcm13020428"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "jwh.2020.8327.pdf",
+      "bytes": 70592,
+      "sha256": "39a77d27e45cdf8022151213e2f3259330a52282d52cb380c71cfd66a9ea4fa4",
+      "pages": 3,
+      "doi_candidates_from_first_two_pages": [
+        "10.1089/jwh.2020.8327"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "jwh.2020.8586.pdf",
+      "bytes": 186466,
+      "sha256": "bced9a9ea23e49dcdf9e8102539a0c1e5e13a93fff3a8fd75a7d2f1c25814732",
+      "pages": 7,
+      "doi_candidates_from_first_two_pages": [
+        "10.1089/jwh.2020.8586"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "life-14-01405.pdf",
+      "bytes": 679167,
+      "sha256": "5d6ad8012b36b0362e2bbaf5c1e68946330eb81e58be16b654af602d5ea5fe00",
+      "pages": 19,
+      "doi_candidates_from_first_two_pages": [
+        "10.3390/life14111405"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "nihms-1522164.pdf",
+      "bytes": 601342,
+      "sha256": "770618e9292b5b479ad37146bff03a0bb6f22b87e4c459ed3daafea4c502a538",
+      "pages": 26,
+      "doi_candidates_from_first_two_pages": [
+        "10.1016/j.sleep.2018.11.019."
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "nihms-1621799.pdf",
+      "bytes": 713356,
+      "sha256": "beb11b5af4ecf821a48f408499a0ec57a33808683b2b0b8feff96f10f40d7a64",
+      "pages": 25,
+      "doi_candidates_from_first_two_pages": [
+        "10.1016/j.sleep.2020.04.024."
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "nihms404913.pdf",
+      "bytes": 1198471,
+      "sha256": "f63c4b262fae9ce1ebc35b30f8447b2e1b0f3c85a2bfc999e56de194d5cae4da",
+      "pages": 16,
+      "doi_candidates_from_first_two_pages": [
+        "10.1097/GME.0b013e31826ce3ed."
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "nihms777275.pdf",
+      "bytes": 1021057,
+      "sha256": "cd5a2887ebc81c8bc82b49f52be50da4c199ae621086d65242231b690a2b2fd9",
+      "pages": 19,
+      "doi_candidates_from_first_two_pages": [
+        "10.1001/jamainternmed.2016.1795."
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "perspectives2021.pdf",
+      "bytes": 700461,
+      "sha256": "aae711f329fcebb2921c59cd13d2b86fde99f280ee34bcf5ac56d844e4054a24",
+      "pages": 12,
+      "doi_candidates_from_first_two_pages": [
+        "10.1111/ppc.13005"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "s43161-023-00124-z.pdf",
+      "bytes": 1051045,
+      "sha256": "f065db615ae46cc1415d1ad9d36eb57d85a590a4408254948d5aa4fd92c45f05",
+      "pages": 8,
+      "doi_candidates_from_first_two_pages": [
+        "10.1186/s43161-023-00124-z"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "The_Effect_of_Progressive_Muscle_Relaxation_on_Pos.pdf",
+      "bytes": 459194,
+      "sha256": "be5c60a43bc5c272d108b504a43c7a05bf38648ba25a3169fad761f8d63df75b",
+      "pages": 16,
+      "doi_candidates_from_first_two_pages": [
+        "10.20849/ijsn.v3i3.461"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    },
+    {
+      "filename": "zsy217.pdf",
+      "bytes": 1111562,
+      "sha256": "8de374b96a32169732dafdc83c75219018586f6c091a5a3549e01f58436468fa",
+      "pages": 11,
+      "doi_candidates_from_first_two_pages": [
+        "10.1093/sleep/zsy217"
+      ],
+      "license": "Redistribution not verified; source document excluded",
+      "usage": "Archived RAG reference corpus; exact experiment membership unverified"
+    }
+  ]
+}

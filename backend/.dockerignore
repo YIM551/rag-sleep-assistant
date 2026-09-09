@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.gradle/
+build/
+logs/
+rag-corpus/
+*.key
+*.pem
+*.p12
+*.jks
+

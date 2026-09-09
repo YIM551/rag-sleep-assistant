@@ -1,0 +1,7 @@
+# Preserve recovered source bytes and source-manifest hashes across platforms.
+backend/** -text
+legacy/** -text
+assets/** -text
+backend/gradlew text eol=lf
+docs/source-manifest.json -text
+docs/corpus-manifest.json -text
